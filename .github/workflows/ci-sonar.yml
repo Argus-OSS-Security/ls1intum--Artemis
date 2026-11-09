@@ -2,37 +2,38 @@ name: Sonar
 
 # Required PR quality gate; waits for the server verdict without rerunning tests.
 # Fork events only verify exact-source evidence using trusted base-branch tools.
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to analyze. PR builds use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-      with_coverage:
-        description: >-
-          Whether the calling run produced the coverage artifacts this job imports. False skips the
-          downloads and analyzes without coverage, which still yields the ratings and issue counts.
-        required: true
-        type: boolean
-    secrets:
-      SONAR_TOKEN:
-        description: 'SonarQube Cloud analysis token for the ls1intum organization.'
-        required: false
-  # Bounded recovery switch: select only the repository's own default branch, never an arbitrary
-  # source SHA or build argument. This lets a repaired workflow refresh develop before it is merged.
-  # checkov:skip=CKV_GHA_7:The boolean only selects the trusted repository default branch for analysis.
-  workflow_dispatch:
-    inputs:
-      analyze_default_branch:
-        description: 'Analyze the repository default branch using this workflow revision (recovery mode).'
-        type: boolean
-        default: false
-      pull_request_number:
-        description: 'Scan reviewed code promoted to internal chore/sonar/pr-<number>; 0 analyzes this ref.'
-        type: number
-        default: 0
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to analyze. PR builds use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+#       with_coverage:
+#         description: >-
+#           Whether the calling run produced the coverage artifacts this job imports. False skips the
+#           downloads and analyzes without coverage, which still yields the ratings and issue counts.
+#         required: true
+#         type: boolean
+#     secrets:
+#       SONAR_TOKEN:
+#         description: 'SonarQube Cloud analysis token for the ls1intum organization.'
+#         required: false
+#   # Bounded recovery switch: select only the repository's own default branch, never an arbitrary
+#   # source SHA or build argument. This lets a repaired workflow refresh develop before it is merged.
+#   # checkov:skip=CKV_GHA_7:The boolean only selects the trusted repository default branch for analysis.
+#   workflow_dispatch:
+#     inputs:
+#       analyze_default_branch:
+#         description: 'Analyze the repository default branch using this workflow revision (recovery mode).'
+#         type: boolean
+#         default: false
+#       pull_request_number:
+#         description: 'Scan reviewed code promoted to internal chore/sonar/pr-<number>; 0 analyzes this ref.'
+#         type: number
+#         default: 0
+# 
 permissions: {}  # default-deny; each job grants only what it needs
 
 # Workflow-level node/java pins are drift-checked by ci-workflows.yml.

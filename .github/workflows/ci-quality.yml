@@ -3,31 +3,32 @@ name: Quality
 # Static checks (server + client): style, lint, type-check, architecture, Java analyses.
 # Kept separate from ci-test.yml (test suites); rationale in README.
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-      base_branch:
-        description: 'Base branch used by analyze_java_files.py for diff context.'
-        required: true
-        type: string
-      has_java:
-        description: 'Whether Java sources changed — gates the Java-specific analyses.'
-        required: true
-        type: boolean
-      has_tum_aet_ui:
-        description: 'Whether TUM AET UI or its application integration changed.'
-        required: true
-        type: boolean
-      check_test_types:
-        description: 'Keep strict test TypeScript compilation on the public runner while draft test execution is deferred.'
-        required: false
-        type: boolean
-        default: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+#       base_branch:
+#         description: 'Base branch used by analyze_java_files.py for diff context.'
+#         required: true
+#         type: string
+#       has_java:
+#         description: 'Whether Java sources changed — gates the Java-specific analyses.'
+#         required: true
+#         type: boolean
+#       has_tum_aet_ui:
+#         description: 'Whether TUM AET UI or its application integration changed.'
+#         required: true
+#         type: boolean
+#       check_test_types:
+#         description: 'Keep strict test TypeScript compilation on the public runner while draft test execution is deferred.'
+#         required: false
+#         type: boolean
+#         default: false
+# 
 permissions: {}  # default-deny; each job grants only what it needs
 
 # Workflow-level node/java pins are drift-checked by ci-workflows.yml.

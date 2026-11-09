@@ -1,39 +1,40 @@
 name: Build
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA the build is for. PR builds use the PR head SHA, not the merge commit.'
-        required: true
-        type: string
-      build_pr_image:
-        description: 'When false, the PR image (docker-pr) is not built. ci.yml passes false for a pull request that only changes tests, which neither E2E nor a test server deploy needs.'
-        required: false
-        type: boolean
-        default: true
-      is_pr:
-        description: 'True when the umbrella was triggered by pull_request.'
-        required: true
-        type: boolean
-      is_internal_pr:
-        description: 'True only for PRs from branches inside ls1intum/Artemis (fork PRs cannot push to GHCR).'
-        required: true
-        type: boolean
-      is_release:
-        description: 'True when the umbrella was triggered by a release.'
-        required: true
-        type: boolean
-      is_release_build:
-        description: 'True for release-eligible builds (release events + develop/main/release-branch pushes). Gates -Psbom. Computed once in ci.yml so the event/ref logic lives in a single place.'
-        required: true
-        type: boolean
-      release_tag:
-        description: 'Tag name of the release. Empty when is_release is false.'
-        required: true
-        type: string
-
-# Default-deny at workflow level; each job grants only what it needs.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA the build is for. PR builds use the PR head SHA, not the merge commit.'
+#         required: true
+#         type: string
+#       build_pr_image:
+#         description: 'When false, the PR image (docker-pr) is not built. ci.yml passes false for a pull request that only changes tests, which neither E2E nor a test server deploy needs.'
+#         required: false
+#         type: boolean
+#         default: true
+#       is_pr:
+#         description: 'True when the umbrella was triggered by pull_request.'
+#         required: true
+#         type: boolean
+#       is_internal_pr:
+#         description: 'True only for PRs from branches inside ls1intum/Artemis (fork PRs cannot push to GHCR).'
+#         required: true
+#         type: boolean
+#       is_release:
+#         description: 'True when the umbrella was triggered by a release.'
+#         required: true
+#         type: boolean
+#       is_release_build:
+#         description: 'True for release-eligible builds (release events + develop/main/release-branch pushes). Gates -Psbom. Computed once in ci.yml so the event/ref logic lives in a single place.'
+#         required: true
+#         type: boolean
+#       release_tag:
+#         description: 'Tag name of the release. Empty when is_release is false.'
+#         required: true
+#         type: string
+# 
+# # Default-deny at workflow level; each job grants only what it needs.
 permissions: {}
 
 # Workflow-level node/java pins are drift-checked by ci-workflows.yml.

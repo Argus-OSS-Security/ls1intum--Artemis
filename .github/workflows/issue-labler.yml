@@ -1,8 +1,9 @@
 name: "Issue Labeler"
-on:
-  issues:
-    types: [opened, edited]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   issues:
+#     types: [opened, edited]
+# 
 permissions:
   issues: write
   contents: read

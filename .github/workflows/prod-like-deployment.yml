@@ -1,27 +1,28 @@
 ---
 name: Deploy Artemis with Ansible
-on:
-  workflow_dispatch:
-    inputs:
-      branch_name:
-        description: 'Branch to deploy'
-        required: true
-      commit_sha:
-        description: 'Commit SHA to deploy'
-        required: true
-      environment_name:
-        description: 'Environment to deploy to'
-        required: true
-        type: choice
-        options:
-          - staging1.artemis.cit.tum.de
-          - staging2.artemis.cit.tum.de
-          - artemis.tum.de
-      triggered_by:
-        description: "Username that triggered deployment (not required, shown if triggered via GitHub UI, logged if triggered via GitHub app)"
-        required: false
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       branch_name:
+#         description: 'Branch to deploy'
+#         required: true
+#       commit_sha:
+#         description: 'Commit SHA to deploy'
+#         required: true
+#       environment_name:
+#         description: 'Environment to deploy to'
+#         required: true
+#         type: choice
+#         options:
+#           - staging1.artemis.cit.tum.de
+#           - staging2.artemis.cit.tum.de
+#           - artemis.tum.de
+#       triggered_by:
+#         description: "Username that triggered deployment (not required, shown if triggered via GitHub UI, logged if triggered via GitHub app)"
+#         required: false
+#         type: string
+# 
 concurrency: ${{ github.event.inputs.environment_name }}
 
 env:

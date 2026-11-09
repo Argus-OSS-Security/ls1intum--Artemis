@@ -13,23 +13,24 @@ name: Dependency Submission (Gradle)
 # Keep Automatic dependency submission disabled in Settings > Advanced Security. This workflow is
 # the sole Gradle snapshot producer; Dependency graph and Dependabot alerts must remain enabled.
 # This repository setting is separate from workflow YAML (see README.md, Dependency submission).
-on:
-  push:
-    branches:
-      - develop
-    paths:
-      - 'build.gradle'
-      - 'settings.gradle'
-      - 'gradle.properties'
-      - 'gradle/**'
-      - '.github/workflows/dependency-submission.yml'
-  # Versions that are not pinned in the build files (ranges, plugin-resolved transitives) move
-  # without a commit, so the snapshot is refreshed weekly as well.
-  schedule:
-    - cron: '47 4 * * 1'
-  workflow_dispatch:
-
-# A newer snapshot of develop supersedes an older one, so there is nothing to wait for.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   push:
+#     branches:
+#       - develop
+#     paths:
+#       - 'build.gradle'
+#       - 'settings.gradle'
+#       - 'gradle.properties'
+#       - 'gradle/**'
+#       - '.github/workflows/dependency-submission.yml'
+#   # Versions that are not pinned in the build files (ranges, plugin-resolved transitives) move
+#   # without a commit, so the snapshot is refreshed weekly as well.
+#   schedule:
+#     - cron: '47 4 * * 1'
+#   workflow_dispatch:
+# 
+# # A newer snapshot of develop supersedes an older one, so there is nothing to wait for.
 concurrency:
   group: dependency-submission-${{ github.ref }}
   cancel-in-progress: true

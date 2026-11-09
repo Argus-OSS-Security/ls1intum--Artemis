@@ -4,9 +4,10 @@ name: Lint Workflows
 # Runs actionlint (configured via .github/actionlint.yaml) and the node/java version
 # drift check.
 
-on:
-  workflow_call: {}
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call: {}
+# 
 permissions: {}
 
 jobs:

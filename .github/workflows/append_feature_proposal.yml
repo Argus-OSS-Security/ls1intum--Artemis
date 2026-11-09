@@ -1,9 +1,10 @@
 name: Append Feature Proposal to Issue Description
 
-on:
-  issues:
-    types: [assigned, unassigned, labeled]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   issues:
+#     types: [assigned, unassigned, labeled]
+# 
 permissions:
   contents: read
   issues: write

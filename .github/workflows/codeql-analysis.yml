@@ -5,11 +5,12 @@ name: CodeQL (Scheduled)
 # be expressed inside a `workflow_call` reusable — only a top-level workflow's `on:` registers
 # cron. It reuses ci-codeql.yml so the scan steps are defined in exactly one place.
 
-on:
-  schedule:
-    - cron: '0 16 * * 0'
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 16 * * 0'
+#   workflow_dispatch:
+# 
 concurrency:
   group: codeql-scheduled-${{ github.ref }}
   cancel-in-progress: false

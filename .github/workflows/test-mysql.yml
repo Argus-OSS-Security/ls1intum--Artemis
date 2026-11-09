@@ -2,12 +2,13 @@ name: Test (MySQL)
 # REMOVE_IN_ARTEMIS_11 (MySQL): delete this workflow with MySQL support
 
 # TODO: Re-enable automatic triggers once MySQL testcontainers are reliable
-on:
-  workflow_dispatch: # Manual trigger only for now
-
-# Manual-only workflow: dedupe repeated dispatches on the same ref (no PR context exists, so
-# keying on github.ref is what actually groups runs; the old pull_request.number fallback to
-# run_id was unique per run and never deduped).
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch: # Manual trigger only for now
+# 
+# # Manual-only workflow: dedupe repeated dispatches on the same ref (no PR context exists, so
+# # keying on github.ref is what actually groups runs; the old pull_request.number fallback to
+# # run_id was unique per run and never deduped).
 concurrency:
   group: test-mysql-${{ github.ref }}
   cancel-in-progress: true

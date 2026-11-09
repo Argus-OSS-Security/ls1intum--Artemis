@@ -3,34 +3,35 @@ run-name: >-
   ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && !github.event.changes.base && format('PR metadata edit #{0}', github.event.pull_request.number) || format('CI: {0}', github.event.pull_request.title || github.ref_name) }}
 # Single CI entry point. See .github/workflows/README.md for the contract.
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened, ready_for_review, edited]
-  push:
-    branches:
-      - develop
-      - main
-      - release/*
-  release:
-    # `published` covers draft promotion. No `push: tags:` trigger — UI release publish
-    # would otherwise double-fire.
-    types: [published]
-  merge_group:
-  workflow_dispatch:
-    inputs:
-      force_build:
-        description: 'Bypass change detection and run every job'
-        type: boolean
-        default: false
-
-# One run per pull request, superseding the previous one, and one run per distinct commit everywhere
-# else. A pull request is the only case where a newer event replaces an older one: the head moves and
-# the old run is about a revision nobody will merge. A push, a merge group and a release each describe
-# a commit of their own, so they are keyed by that commit and never wait for one another — keying
-# pushes by `github.ref` alone put every push to a branch in one group, and since `cancel-in-progress`
-# is false for them, a push to develop could not start a single job until the previous push's run had
-# finished all of its server test shards and both E2E phases. That held back the `.war` and the Docker
-# image, which are what a deployment of that commit needs, for the better part of an hour.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     types: [opened, synchronize, reopened, ready_for_review, edited]
+#   push:
+#     branches:
+#       - develop
+#       - main
+#       - release/*
+#   release:
+#     # `published` covers draft promotion. No `push: tags:` trigger — UI release publish
+#     # would otherwise double-fire.
+#     types: [published]
+#   merge_group:
+#   workflow_dispatch:
+#     inputs:
+#       force_build:
+#         description: 'Bypass change detection and run every job'
+#         type: boolean
+#         default: false
+# 
+# # One run per pull request, superseding the previous one, and one run per distinct commit everywhere
+# # else. A pull request is the only case where a newer event replaces an older one: the head moves and
+# # the old run is about a revision nobody will merge. A push, a merge group and a release each describe
+# # a commit of their own, so they are keyed by that commit and never wait for one another — keying
+# # pushes by `github.ref` alone put every push to a branch in one group, and since `cancel-in-progress`
+# # is false for them, a push to develop could not start a single job until the previous push's run had
+# # finished all of its server test shards and both E2E phases. That held back the `.war` and the Docker
+# # image, which are what a deployment of that commit needs, for the better part of an hour.
 concurrency:
   group: >-
     ${{ github.event_name == 'pull_request' && github.event.action == 'edited' && !github.event.changes.base && format('ci-pr-metadata-{0}', github.run_id)

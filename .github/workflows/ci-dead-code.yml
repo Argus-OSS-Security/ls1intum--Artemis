@@ -11,14 +11,15 @@ name: Dead Code
 #
 # Both jobs are pure source analysis: no Gradle build, no database, no server boot.
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+# 
 permissions: {}  # default-deny; each job grants only what it needs
 
 # Workflow-level node pin is drift-checked by ci-workflows.yml.

@@ -18,12 +18,13 @@ name: PR Coverage Reporter
 # "pwn request", this workflow NEVER checks out or executes PR/fork code — it checks out the trusted
 # default branch, derives changed files from the GitHub API, and runs the coverage tooling with
 # `node` (no `pnpm install`, whose postinstall hook is fork-editable) against downloaded artifacts.
-on:
-  workflow_run:
-    # Must match the `name:` field of .github/workflows/ci.yml.
-    workflows: ["CI"]
-    types: [completed]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_run:
+#     # Must match the `name:` field of .github/workflows/ci.yml.
+#     workflows: ["CI"]
+#     types: [completed]
+# 
 env:
   CI: true
   node: 24

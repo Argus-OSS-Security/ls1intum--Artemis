@@ -4,11 +4,12 @@ name: Nightly LTI Interop
 # It does not consume any untrusted GitHub event inputs (issue/PR titles, commit messages, etc.),
 # so command injection vectors from such inputs are not applicable here.
 
-on:
-  schedule:
-    - cron: '0 3 * * *'        # 03:00 UTC daily
-  workflow_dispatch:           # manual ad-hoc runs
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 3 * * *'        # 03:00 UTC daily
+#   workflow_dispatch:           # manual ad-hoc runs
+# 
 concurrency:
   group: nightly-lti-interop
   cancel-in-progress: false

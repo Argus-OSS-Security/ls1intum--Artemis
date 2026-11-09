@@ -7,14 +7,15 @@ name: Terminology
 # `build_relevant`, which is false for a documentation-only pull request, and documentation is
 # where these words most often come back. This one runs on every pull request.
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+# 
 permissions: {}  # default-deny; the job grants only what it needs
 
 jobs:

@@ -7,24 +7,25 @@ name: Documentation Checks
 # What each script proves, and why the pages that it lists are only advice, is documented in the script itself and
 # in "Keeping the documentation up to date" of documentation/docs/developer/guidelines/documentation.mdx.
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to check. PR runs use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-      pull_request_number:
-        description: 'Number of the pull request, for the advice about the pages that the change may have made wrong. Empty outside a pull request.'
-        required: false
-        default: ''
-        type: string
-      base_sha:
-        description: 'Base commit of the pull request, to compare review dates with.'
-        required: false
-        default: ''
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to check. PR runs use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+#       pull_request_number:
+#         description: 'Number of the pull request, for the advice about the pages that the change may have made wrong. Empty outside a pull request.'
+#         required: false
+#         default: ''
+#         type: string
+#       base_sha:
+#         description: 'Base commit of the pull request, to compare review dates with.'
+#         required: false
+#         default: ''
+#         type: string
+# 
 permissions: {}
 
 jobs:

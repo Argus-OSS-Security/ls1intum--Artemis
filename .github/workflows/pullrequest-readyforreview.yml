@@ -1,8 +1,9 @@
 name: Pull Request Ready for Review
-on:
-  pull_request_target:
-    types: [ready_for_review]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [ready_for_review]
+# 
 permissions:
   pull-requests: write
 

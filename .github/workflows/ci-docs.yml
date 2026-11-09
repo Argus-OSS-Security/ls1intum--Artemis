@@ -1,14 +1,15 @@
 name: Build Documentation
 
-on:
-  workflow_call:
-    inputs:
-      upload_pages_artifact:
-        description: 'Also upload the built site as a GitHub Pages artifact (set true by the deploy paths in ci.yml / deploy-documentation.yml). PR validation runs leave it false.'
-        required: false
-        default: false
-        type: boolean
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       upload_pages_artifact:
+#         description: 'Also upload the built site as a GitHub Pages artifact (set true by the deploy paths in ci.yml / deploy-documentation.yml). PR validation runs leave it false.'
+#         required: false
+#         default: false
+#         type: boolean
+# 
 permissions: {}
 
 # Workflow-level node pin is drift-checked by ci-workflows.yml.

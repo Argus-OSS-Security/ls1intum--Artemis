@@ -18,23 +18,24 @@
 # the analysis needs repository-level metadata that a fork PR token cannot read.
 name: OpenSSF Scorecard
 
-on:
-  # The analysis reflects repository settings, not the diff, so a weekly run is enough.
-  schedule:
-    - cron: '31 5 * * 1'
-  # Scorecard only exempts wrapper JARs after a successful validation run on the latest commit.
-  # A push trigger races that validation and can publish a false Binary-Artifacts penalty.
-  workflow_run:
-    workflows:
-      - Validate Gradle Wrapper
-    types:
-      - completed
-    branches:
-      - develop
-  # Branch-protection findings change when protection rules change, not when code does.
-  branch_protection_rule:
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   # The analysis reflects repository settings, not the diff, so a weekly run is enough.
+#   schedule:
+#     - cron: '31 5 * * 1'
+#   # Scorecard only exempts wrapper JARs after a successful validation run on the latest commit.
+#   # A push trigger races that validation and can publish a false Binary-Artifacts penalty.
+#   workflow_run:
+#     workflows:
+#       - Validate Gradle Wrapper
+#     types:
+#       - completed
+#     branches:
+#       - develop
+#   # Branch-protection findings change when protection rules change, not when code does.
+#   branch_protection_rule:
+#   workflow_dispatch:
+# 
 permissions: {}
 
 jobs:

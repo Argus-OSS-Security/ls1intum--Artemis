@@ -1,28 +1,29 @@
 name: Deploy to a test-server
 
-on:
-  workflow_dispatch:
-    inputs:
-      branch_name:
-        description: "Which branch to deploy"
-        required: true
-        type: string
-      commit_sha:
-        description: "Exact commit SHA to deploy. When set, this commit's image is verified and deployed; otherwise the branch/PR head is used."
-        required: false
-        type: string
-      environment_name:
-        description: "Which environment to deploy (e.g. artemis-test7.artemis.cit.tum.de, etc.)."
-        required: true
-        type: string
-      triggered_by:
-        description: "Username that triggered deployment (not required, shown if triggered via GitHub UI, logged if triggered via GitHub app)"
-        required: false
-        type: string
-
-# Serialize deployments per environment. `cancel-in-progress: false` means a running deploy is
-# never interrupted; GitHub keeps at most ONE pending run per group, so rapid re-dispatches to the
-# same environment coalesce to the most recent request.
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       branch_name:
+#         description: "Which branch to deploy"
+#         required: true
+#         type: string
+#       commit_sha:
+#         description: "Exact commit SHA to deploy. When set, this commit's image is verified and deployed; otherwise the branch/PR head is used."
+#         required: false
+#         type: string
+#       environment_name:
+#         description: "Which environment to deploy (e.g. artemis-test7.artemis.cit.tum.de, etc.)."
+#         required: true
+#         type: string
+#       triggered_by:
+#         description: "Username that triggered deployment (not required, shown if triggered via GitHub UI, logged if triggered via GitHub app)"
+#         required: false
+#         type: string
+# 
+# # Serialize deployments per environment. `cancel-in-progress: false` means a running deploy is
+# # never interrupted; GitHub keeps at most ONE pending run per group, so rapid re-dispatches to the
+# # same environment coalesce to the most recent request.
 concurrency:
   group: ${{ github.event.inputs.environment_name }}
   cancel-in-progress: false

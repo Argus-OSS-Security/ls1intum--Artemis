@@ -1,55 +1,56 @@
 name: E2E Tests
 
-on:
-  workflow_call:
-    inputs:
-      branch_name:
-        description: 'Branch under test (head ref for PRs, ref_name otherwise).'
-        required: true
-        type: string
-      commit_sha:
-        description: 'SHA under test. For PRs this is the PR head SHA.'
-        required: true
-        type: string
-      base_branch:
-        description: 'Base branch for relevant-tests computation.'
-        required: true
-        type: string
-      is_pr:
-        description: 'True when the umbrella was triggered by pull_request.'
-        required: true
-        type: boolean
-      run_full_suite:
-        description: 'Run the full suite; false permits audited affected-module and consumer workflows plus smoke tests.'
-        required: false
-        type: boolean
-        default: true
-      pr_number:
-        description: 'PR number (0 when not a PR).'
-        required: false
-        type: number
-        default: 0
-    secrets:
-      ARTEMIS_ADMIN_PASSWORD:
-        required: true
-      ARTEMIS_ADMIN_USERNAME:
-        required: true
-      PLAYWRIGHT_REPORT_TOKEN:
-        required: false
-      HELIOS_REPO_SECRET:
-        required: false
-    outputs:
-      e2e_result:
-        description: 'Raw aggregated E2E test outcome (success|failure|error), for the CI Summary
-          table. This is the unexonerated signal — `failure` here includes known-flaky-only runs
-          that report-results exonerates. The caller `e2e` job conclusion is the exonerated verdict
-          (failures without history also remain blocking). `e2e` is part of the required
-          `all-required-ci-passed` gate; only failures with known-flaky history are exonerated.'
-        value: ${{ jobs.report-results.outputs.status }}
-      e2e_scope:
-        description: 'Requested E2E coverage: full suite or selected relevant and smoke specs.'
-        value: ${{ jobs.report-results.outputs.scope }}
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       branch_name:
+#         description: 'Branch under test (head ref for PRs, ref_name otherwise).'
+#         required: true
+#         type: string
+#       commit_sha:
+#         description: 'SHA under test. For PRs this is the PR head SHA.'
+#         required: true
+#         type: string
+#       base_branch:
+#         description: 'Base branch for relevant-tests computation.'
+#         required: true
+#         type: string
+#       is_pr:
+#         description: 'True when the umbrella was triggered by pull_request.'
+#         required: true
+#         type: boolean
+#       run_full_suite:
+#         description: 'Run the full suite; false permits audited affected-module and consumer workflows plus smoke tests.'
+#         required: false
+#         type: boolean
+#         default: true
+#       pr_number:
+#         description: 'PR number (0 when not a PR).'
+#         required: false
+#         type: number
+#         default: 0
+#     secrets:
+#       ARTEMIS_ADMIN_PASSWORD:
+#         required: true
+#       ARTEMIS_ADMIN_USERNAME:
+#         required: true
+#       PLAYWRIGHT_REPORT_TOKEN:
+#         required: false
+#       HELIOS_REPO_SECRET:
+#         required: false
+#     outputs:
+#       e2e_result:
+#         description: 'Raw aggregated E2E test outcome (success|failure|error), for the CI Summary
+#           table. This is the unexonerated signal — `failure` here includes known-flaky-only runs
+#           that report-results exonerates. The caller `e2e` job conclusion is the exonerated verdict
+#           (failures without history also remain blocking). `e2e` is part of the required
+#           `all-required-ci-passed` gate; only failures with known-flaky history are exonerated.'
+#         value: ${{ jobs.report-results.outputs.status }}
+#       e2e_scope:
+#         description: 'Requested E2E coverage: full suite or selected relevant and smoke specs.'
+#         value: ${{ jobs.report-results.outputs.scope }}
+# 
 permissions: {}  # default-deny; each job grants only what it needs
 
 env:

@@ -1,8 +1,9 @@
 name: Pull Request Opened
-on:
-  pull_request_target:
-    types: [opened]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [opened]
+# 
 permissions:
   pull-requests: write
 

@@ -1,8 +1,9 @@
 name: Stale
-on:
-  schedule:
-    - cron: "0 12 * * *"
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: "0 12 * * *"
+# 
 permissions:
   issues: write
   pull-requests: write

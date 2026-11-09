@@ -6,9 +6,10 @@ name: Deploy Documentation to GitHub Pages
 # ci-docs.yml's build and share the `pages` concurrency group, so a manual redeploy and an
 # automatic deploy never run at the same time.
 
-on:
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_dispatch:
+# 
 permissions: {}
 
 concurrency:

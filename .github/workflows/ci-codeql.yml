@@ -9,14 +9,15 @@ name: CodeQL
 # don't build one here at all — only `prebuild` runs, since it generates
 # environment.override.ts, a real source file several `.ts` files import.
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to analyse. PR runs use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to analyse. PR runs use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+# 
 permissions: {}  # default-deny; the job grants only what CodeQL needs
 
 # Workflow-level node/java pins are drift-checked by ci-workflows.yml.

@@ -1,9 +1,10 @@
 name: Ready to Merge Label Validator
 
-on:
-  pull_request_target:
-    types: [labeled]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request_target:
+#     types: [labeled]
+# 
 permissions:
   contents: read
 

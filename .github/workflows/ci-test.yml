@@ -1,63 +1,64 @@
 name: Test
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to test. PR builds use the PR head SHA (matching ci-build.yml) — not the GitHub-generated merge commit, so Build and Test exercise the same tree.'
-        required: true
-        type: string
-      base_branch:
-        description: 'Base branch used for module-affected test selection.'
-        required: true
-        type: string
-      run_all_tests:
-        description: 'When true, run every test. When false, only run tests in modules affected by changes vs base_branch.'
-        required: true
-        type: boolean
-      run_sandbox_tests:
-        description: 'Whether the AI Worker sandbox or Hyperion code changed and needs real Docker tests.'
-        required: true
-        type: boolean
-      run_server_tests:
-        description: 'When false, the server suite (planning, shards and report) is skipped. ci.yml passes false for a pull request that cannot affect it.'
-        required: false
-        type: boolean
-        default: true
-      run_client_tests:
-        description: 'When false, the client suite is skipped. ci.yml passes false for a pull request that cannot affect it.'
-        required: false
-        type: boolean
-        default: true
-      is_internal_pr:
-        description: 'True only for PRs from branches inside ls1intum/Artemis (external services like Codacy skip on fork PRs).'
-        required: true
-        type: boolean
-      pr_author:
-        description: 'PR author login. Used to skip noisy annotations for bots. Empty when not a PR.'
-        required: true
-        type: string
-    outputs:
-      affected_tests:
-        description: 'True when either test suite used affected selection instead of producing full-suite coverage.'
-        value: ${{ jobs.server-test-shards.outputs.full_suite == 'false' || jobs.client-tests.outputs.mode == 'affected' || jobs.client-tests.outputs.mode == 'none' }}
-      server_full_suite:
-        description: 'Whether the server planner selected the complete seven-shard suite. Empty when server tests were skipped.'
-        value: ${{ jobs.server-test-shards.outputs.full_suite }}
-      client_mode:
-        description: 'Client test scope: full, affected, or none. Empty when the client job was skipped.'
-        value: ${{ jobs.client-tests.outputs.mode }}
-      server_sonar_coverage:
-        description: 'True when successful selected server tests published their execution data for Sonar PR coverage.'
-        value: ${{ jobs.server-tests.outputs.sonar_coverage }}
-      client_sonar_coverage:
-        description: 'True when successful selected client tests emitted LCOV for Sonar PR coverage; independent of complete-suite coverage.'
-        value: ${{ jobs.client-tests.outputs.sonar_coverage }}
-    secrets:
-      CODACY_PROJECT_TOKEN:
-        description: 'Coverage upload token. Optional — coverage is uploaded only on internal PRs by non-bot authors.'
-        required: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to test. PR builds use the PR head SHA (matching ci-build.yml) — not the GitHub-generated merge commit, so Build and Test exercise the same tree.'
+#         required: true
+#         type: string
+#       base_branch:
+#         description: 'Base branch used for module-affected test selection.'
+#         required: true
+#         type: string
+#       run_all_tests:
+#         description: 'When true, run every test. When false, only run tests in modules affected by changes vs base_branch.'
+#         required: true
+#         type: boolean
+#       run_sandbox_tests:
+#         description: 'Whether the AI Worker sandbox or Hyperion code changed and needs real Docker tests.'
+#         required: true
+#         type: boolean
+#       run_server_tests:
+#         description: 'When false, the server suite (planning, shards and report) is skipped. ci.yml passes false for a pull request that cannot affect it.'
+#         required: false
+#         type: boolean
+#         default: true
+#       run_client_tests:
+#         description: 'When false, the client suite is skipped. ci.yml passes false for a pull request that cannot affect it.'
+#         required: false
+#         type: boolean
+#         default: true
+#       is_internal_pr:
+#         description: 'True only for PRs from branches inside ls1intum/Artemis (external services like Codacy skip on fork PRs).'
+#         required: true
+#         type: boolean
+#       pr_author:
+#         description: 'PR author login. Used to skip noisy annotations for bots. Empty when not a PR.'
+#         required: true
+#         type: string
+#     outputs:
+#       affected_tests:
+#         description: 'True when either test suite used affected selection instead of producing full-suite coverage.'
+#         value: ${{ jobs.server-test-shards.outputs.full_suite == 'false' || jobs.client-tests.outputs.mode == 'affected' || jobs.client-tests.outputs.mode == 'none' }}
+#       server_full_suite:
+#         description: 'Whether the server planner selected the complete seven-shard suite. Empty when server tests were skipped.'
+#         value: ${{ jobs.server-test-shards.outputs.full_suite }}
+#       client_mode:
+#         description: 'Client test scope: full, affected, or none. Empty when the client job was skipped.'
+#         value: ${{ jobs.client-tests.outputs.mode }}
+#       server_sonar_coverage:
+#         description: 'True when successful selected server tests published their execution data for Sonar PR coverage.'
+#         value: ${{ jobs.server-tests.outputs.sonar_coverage }}
+#       client_sonar_coverage:
+#         description: 'True when successful selected client tests emitted LCOV for Sonar PR coverage; independent of complete-suite coverage.'
+#         value: ${{ jobs.client-tests.outputs.sonar_coverage }}
+#     secrets:
+#       CODACY_PROJECT_TOKEN:
+#         description: 'Coverage upload token. Optional — coverage is uploaded only on internal PRs by non-bot authors.'
+#         required: false
+# 
 permissions: {}  # default-deny; each job grants only what it needs
 
 # Workflow-level node/java pins are drift-checked by ci-workflows.yml.

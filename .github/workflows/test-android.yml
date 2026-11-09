@@ -1,37 +1,38 @@
 name: Android E2E Tests
 
-on:
-  pull_request:
-    paths-ignore:
-      - 'README.md'
-      - '.github/CODE_OF_CONDUCT.md'
-      - '.github/CONTRIBUTING.md'
-      - 'LICENSE'
-      - '.github/SECURITY.md'
-      - 'documentation/**'
-      - '.github/**'
-      - '!.github/workflows/test-android.yml'
-  push:
-    branches:
-      - develop
-      - main
-      - release/*
-    tags:
-      - '[0-9]+.[0-9]+'
-      - '[0-9]+.[0-9]+.[0-9]+'
-    paths-ignore:
-      - 'README.md'
-      - '.github/CODE_OF_CONDUCT.md'
-      - '.github/CONTRIBUTING.md'
-      - 'LICENSE'
-      - '.github/SECURITY.md'
-      - 'documentation/**'
-      - '.github/**'
-      - '!.github/workflows/test-android.yml'
-  release:
-    types:
-      - created
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   pull_request:
+#     paths-ignore:
+#       - 'README.md'
+#       - '.github/CODE_OF_CONDUCT.md'
+#       - '.github/CONTRIBUTING.md'
+#       - 'LICENSE'
+#       - '.github/SECURITY.md'
+#       - 'documentation/**'
+#       - '.github/**'
+#       - '!.github/workflows/test-android.yml'
+#   push:
+#     branches:
+#       - develop
+#       - main
+#       - release/*
+#     tags:
+#       - '[0-9]+.[0-9]+'
+#       - '[0-9]+.[0-9]+.[0-9]+'
+#     paths-ignore:
+#       - 'README.md'
+#       - '.github/CODE_OF_CONDUCT.md'
+#       - '.github/CONTRIBUTING.md'
+#       - 'LICENSE'
+#       - '.github/SECURITY.md'
+#       - 'documentation/**'
+#       - '.github/**'
+#       - '!.github/workflows/test-android.yml'
+#   release:
+#     types:
+#       - created
+# 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}

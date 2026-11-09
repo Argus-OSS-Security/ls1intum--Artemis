@@ -14,16 +14,17 @@ name: Nightly Iris E2E
 # The workflow runs on a fixed schedule against the default branch and on manual dispatch. It does not
 # consume untrusted GitHub event inputs, so command-injection vectors are not applicable here.
 
-on:
-  schedule:
-    - cron: '0 2 * * *'        # 02:00 UTC daily (offset from the LTI nightly at 03:00)
-  workflow_dispatch:           # manual ad-hoc runs (use this to validate/iterate the workflow)
-    inputs:
-      edutelligence_ref:
-        description: 'edutelligence git ref to build Pyris from'
-        default: 'main'
-        required: false
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 2 * * *'        # 02:00 UTC daily (offset from the LTI nightly at 03:00)
+#   workflow_dispatch:           # manual ad-hoc runs (use this to validate/iterate the workflow)
+#     inputs:
+#       edutelligence_ref:
+#         description: 'edutelligence git ref to build Pyris from'
+#         default: 'main'
+#         required: false
+# 
 concurrency:
   group: nightly-iris-e2e
   cancel-in-progress: false

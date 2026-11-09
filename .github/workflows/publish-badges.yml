@@ -1,12 +1,13 @@
 name: Publish README Badges
 
-on:
-    release:
-        types: [published, edited, deleted, unpublished]
-    schedule:
-        - cron: '23 5 * * *'
-    workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#     release:
+#         types: [published, edited, deleted, unpublished]
+#     schedule:
+#         - cron: '23 5 * * *'
+#     workflow_dispatch:
+# 
 permissions: {}
 
 jobs:

@@ -14,11 +14,12 @@ name: Nightly Hyperion E2E
 # The workflow runs on a fixed schedule against the default branch and on manual dispatch. It does not consume
 # untrusted GitHub event inputs, so command-injection vectors are not applicable here.
 
-on:
-  schedule:
-    - cron: '0 4 * * *'        # 04:00 UTC daily (an hour after the LTI nightly at 03:00, which follows Iris at 02:00)
-  workflow_dispatch:           # manual ad-hoc runs (use this to validate/iterate the workflow)
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 4 * * *'        # 04:00 UTC daily (an hour after the LTI nightly at 03:00, which follows Iris at 02:00)
+#   workflow_dispatch:           # manual ad-hoc runs (use this to validate/iterate the workflow)
+# 
 concurrency:
   group: nightly-hyperion-e2e
   cancel-in-progress: false

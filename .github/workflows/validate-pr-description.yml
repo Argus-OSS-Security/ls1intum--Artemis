@@ -1,9 +1,10 @@
 name: Validate PR Description
 
-on:
-    pull_request_target:
-        types: [opened, edited, ready_for_review, synchronize, reopened]
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#     pull_request_target:
+#         types: [opened, edited, ready_for_review, synchronize, reopened]
+# 
 permissions:
   contents: read
 

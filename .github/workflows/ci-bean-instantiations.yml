@@ -1,13 +1,14 @@
 name: Check Bean Instantiations on Startup and with deferred eager Initialization
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to check. PR runs use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to check. PR runs use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+# 
 permissions: {}
 
 # Workflow-level java pin is drift-checked by ci-workflows.yml.

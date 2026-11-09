@@ -5,11 +5,12 @@ name: Documentation Maintenance
 # per problem, which is closed again when the problem is gone. It lives in its own file because a `schedule:` cron
 # cannot be declared inside a reusable workflow.
 
-on:
-  schedule:
-    - cron: '0 5 * * 1'
-  workflow_dispatch:
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   schedule:
+#     - cron: '0 5 * * 1'
+#   workflow_dispatch:
+# 
 permissions: {}
 
 concurrency:

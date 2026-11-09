@@ -11,14 +11,15 @@ name: Liquibase Schema
 # any container starts. The database checks need Docker but no Gradle build beyond resolving the JDBC
 # drivers, and the whole matrix finishes in a couple of minutes.
 
-on:
-  workflow_call:
-    inputs:
-      commit_sha:
-        description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
-        required: true
-        type: string
-
+# Triggers intentionally disabled for Argus-OSS-Security.
+# on:
+#   workflow_call:
+#     inputs:
+#       commit_sha:
+#         description: 'SHA to check. PR builds use the PR head SHA (matching ci-build.yml).'
+#         required: true
+#         type: string
+# 
 permissions: {} # default-deny; each job grants only what it needs
 
 env:
